@@ -1,18 +1,28 @@
 var graph = require('fbgraph');
-var userAccessToken = 'EAAJx88LKyAEBAJyHQ9RAqvu6Gvt91b1ZBIUCnB7BujcO4TAi05b0ArgZCw1mlaza8vJoirgXmGyGdHKlc3cifr8FoMzYjtUWQC25GexzZAQfxmkUQ1Pr3ZAt0TTUaDrxLdeHEdwv2ZCZBr3CMVkhDGjTI24VxzJDTal795OOZAz0cetqr2ED2eQUS8ZCVQzi4Ucm6iasdofQKjoTwzXLnX6Ca1Tt89PDQB0ZD';
+var userAccessToken = 'TOKEN';
 var igUserId = '17841424110463537';
 var caption = '';
 var mediaContainerId = '';
-var imageLink = 'https://raw.githubusercontent.com/Quiza12/pathtopeace/master/images/just-breathe.jpg';
+var imageLink = 'https://raw.githubusercontent.com/Quiza12/NanoNarratives/master/images/';
+var uniqueImageName = '';
 var options = {
     timeout:  30000,
     pool:     { maxSockets:  Infinity },
     headers:  { connection:  "keep-alive" }
 };
 
-function captureArguments() {
-  var arguments = process.argv.slice(2);
-  caption = arguments[0];
+function getDate() {
+  var today = new Date();
+  var yyyy = today.getFullYear();
+  var mm = today.getMonth() + 1; //months start at 0
+  var dd = today.getDate();
+
+  if (dd < 10) dd = '0' + dd;
+  if (mm < 10) mm = '0' + mm;
+
+  caption = dd + '/' + mm + '/' + yyyy;
+  uniqueImageName = dd + mm + yyyy;
+  console.log("Posting for " + caption);
 }
 
 function setupFbGraph() {
@@ -22,7 +32,7 @@ function setupFbGraph() {
 
 function createMediaContainer() {
   console.log("Creating media container...");
-  var url = igUserId + '/media?image_url=' + imageLink + '&caption=' + caption;
+  var url = igUserId + '/media?image_url=' + imageLink + uniqueImageName + '.jpg' + '&caption=' + caption;
   graph
     .setOptions(options)
     .post(url, function(err, res) {
@@ -45,6 +55,6 @@ function publish() {
     });
 }
 
-captureArguments();
+getDate();
 setupFbGraph();
 createMediaContainer();
