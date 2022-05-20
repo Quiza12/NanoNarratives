@@ -1,6 +1,6 @@
 var graph = require('fbgraph');
-var userAccessToken = 'TOKEN';
-var igUserId = '17841424110463537';
+require('dotenv').config()
+
 var caption = '';
 var mediaContainerId = '';
 var imageLink = 'https://raw.githubusercontent.com/Quiza12/NanoNarratives/master/images/';
@@ -27,12 +27,12 @@ function getDate() {
 
 function setupFbGraph() {
   console.log("Setting user access token...");
-  graph.setAccessToken(userAccessToken);
+  graph.setAccessToken(process.env.IG_UAT);
 }
 
 function createMediaContainer() {
   console.log("Creating media container...");
-  var url = igUserId + '/media?image_url=' + imageLink + uniqueImageName + '.jpg' + '&caption=' + caption;
+  var url = process.env.IG_USER_ID + '/media?image_url=' + imageLink + uniqueImageName + '.jpg' + '&caption=' + caption;
   graph
     .setOptions(options)
     .post(url, function(err, res) {
@@ -47,7 +47,7 @@ function createMediaContainer() {
 
 function publish() {
   console.log("Publishing...");
-  var url = igUserId + '/media_publish?creation_id=' + mediaContainerId;
+  var url = process.env.IG_USER_ID + '/media_publish?creation_id=' + mediaContainerId;
   graph
     .setOptions(options)
     .post(url, function(err, res) {
