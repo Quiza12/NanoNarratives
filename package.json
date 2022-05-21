@@ -1,0 +1,31 @@
+{
+  "name": "nanonarratives",
+  "version": "1.0.0",
+  "description": "",
+  "main": "post-twitter.js",
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "facebook-node-sdk": "^0.2.0",
+    "fbgraph": "^1.4.4",
+    "g": "^2.0.1",
+    "got": "^12.0.4",
+    "needle": "^3.1.0",
+    "oauth-1.0a": "^2.2.6",
+    "twitter": "^1.7.1",
+    "twitter-api-v2": "^1.12.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Quiza12/NanoNarratives.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Quiza12/NanoNarratives/issues"
+  },
+  "homepage": "https://github.com/Quiza12/NanoNarratives#readme"
+}
