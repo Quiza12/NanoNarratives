@@ -1,5 +1,5 @@
-var graph = require('fbgraph');
-require('dotenv').config()
+import graph from 'fbgraph'
+import './env.js';
 
 var caption = '';
 var mediaContainerId = '';
