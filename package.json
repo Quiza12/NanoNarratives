@@ -5,6 +5,8 @@
   "main": "post-twitter.js",
   "type": "module",
   "dependencies": {
+    "csv": "^6.0.5",
+    "csv-parse": "^5.0.4",
     "dotenv": "^16.0.1",
     "facebook-node-sdk": "^0.2.0",
     "fbgraph": "^1.4.4",

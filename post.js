@@ -1,7 +1,11 @@
 import graph from 'fbgraph';
 import Twitter from 'twitter';
+import fs from 'fs';
+import { parse } from 'csv-parse';
 import './env.js';
 
+const nnMap = new Map();
+var daysNanoNarrative = '';
 var status = 'The bin wasn\'t going to take itself out, but try telling that to the three hungover housemates.';
 var caption = '';
 var mediaContainerId = '';
@@ -19,6 +23,8 @@ var client = new Twitter({
   access_token_secret: process.env.ACCESS_TOKEN_SECRET
 });
 
+
+// Instagram ---------------------------->
 
 function getDate() {
   var today = new Date();
@@ -71,12 +77,35 @@ function publishInstagram() {
   createMediaContainer();
 }
 
-function publishTwitter() {
-  console.log("Publishing on Twitter...");
+// Twitter ---------------------------->
+
+function findDaysNarrative() {
+  console.log("  Finding day's Nano Narrative...");
+  fs.createReadStream('./nn.csv')
+      .pipe(parse({delimiter: ','}))
+      .on('data', function(csvrow) {
+          nn.set(csvrow[0], csvrow[1]);
+      })
+      .on('end',function() {
+        for (let [key, value] of nnMap.entries()) {
+          if (key === caption)
+            daysNanoNarrative = value;
+        }
+      });
+}
+
+function postTwitter() {
+  console.log("  Publishing...");
   client.post('statuses/update', { status: status },  function(error, tweet, response) {
     if(error) throw error;
     console.log("Tweeted!");
   });
+}
+
+function publishTwitter() {
+  console.log("Publishing on Twitter...");
+  findDaysNarrative();
+  postTwitter();
 }
 
 console.log("--Nano Narratives Poster--");
