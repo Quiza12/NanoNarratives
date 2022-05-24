@@ -68,6 +68,7 @@ function postInstagram() {
     .setOptions(options)
     .post(url, function(err, res) {
       console.log("  Published!");
+      publishTwitter();
     });
 }
 
@@ -84,7 +85,7 @@ function findDaysNarrative() {
   fs.createReadStream('./nn.csv')
       .pipe(parse({delimiter: ','}))
       .on('data', function(csvrow) {
-          nn.set(csvrow[0], csvrow[1]);
+          nnMap.set(csvrow[0], csvrow[1]);
       })
       .on('end',function() {
         for (let [key, value] of nnMap.entries()) {
@@ -95,10 +96,10 @@ function findDaysNarrative() {
 }
 
 function postTwitter() {
-  console.log("  Publishing...");
+  console.log("  Tweeting...");
   client.post('statuses/update', { status: status },  function(error, tweet, response) {
     if(error) throw error;
-    console.log("Tweeted!");
+    console.log("  Tweeted!");
   });
 }
 
@@ -108,8 +109,12 @@ function publishTwitter() {
   postTwitter();
 }
 
+function post() {
+  getDate();
+  publishInstagram();
+}
+
+console.log("");
 console.log("--Nano Narratives Poster--");
 console.log("");
-getDate();
-publishInstagram();
-publishTwitter();
+post();
