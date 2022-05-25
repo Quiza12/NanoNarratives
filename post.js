@@ -6,7 +6,6 @@ import './env.js';
 
 const nnMap = new Map();
 var daysNanoNarrative = '';
-var status = 'The bin wasn\'t going to take itself out, but try telling that to the three hungover housemates.';
 var caption = '';
 var mediaContainerId = '';
 var imageLink = 'https://raw.githubusercontent.com/Quiza12/NanoNarratives/master/images/';
@@ -68,7 +67,6 @@ function postInstagram() {
     .setOptions(options)
     .post(url, function(err, res) {
       console.log("  Published!");
-      publishTwitter();
     });
 }
 
@@ -86,18 +84,18 @@ function findDaysNarrative() {
       .pipe(parse({delimiter: ','}))
       .on('data', function(csvrow) {
           nnMap.set(csvrow[0], csvrow[1]);
+          if (csvrow[0] == caption) {
+            daysNanoNarrative = csvrow[1];
+          }
       })
       .on('end',function() {
-        for (let [key, value] of nnMap.entries()) {
-          if (key === caption)
-            daysNanoNarrative = value;
-        }
+        postTwitter();
       });
 }
 
 function postTwitter() {
   console.log("  Tweeting...");
-  client.post('statuses/update', { status: status },  function(error, tweet, response) {
+  client.post('statuses/update', { status: daysNanoNarrative },  function(error, tweet, response) {
     if(error) throw error;
     console.log("  Tweeted!");
   });
@@ -106,11 +104,11 @@ function postTwitter() {
 function publishTwitter() {
   console.log("Publishing on Twitter...");
   findDaysNarrative();
-  postTwitter();
 }
 
 function post() {
   getDate();
+  publishTwitter();
   publishInstagram();
 }
 
