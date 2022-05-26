@@ -70,7 +70,7 @@ function publishTwitter() {
 
 function post() {
   getDate();
-  publishInstagram();
+  publishTwitter();
 }
 
 console.log("");
