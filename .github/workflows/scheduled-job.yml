@@ -1,6 +1,8 @@
 name: Scheduled Job
 
-on: [push]
+on:
+  schedule:
+    - cron: "0 19 * * *"
 
 jobs:
   scheduled-job:
@@ -16,4 +18,6 @@ jobs:
           TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
           TWITTER_ACCESS_TOKEN_KEY: ${{ secrets.TWITTER_ACCESS_TOKEN_KEY }}
           TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
-        run: node test.js "$TWITTER_CONSUMER_KEY" "$TWITTER_CONSUMER_SECRET" "$TWITTER_ACCESS_TOKEN_KEY" "$TWITTER_ACCESS_TOKEN_SECRET"
+          IG_UAT: ${{ secrets.IG_UAT }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: node test.js "$TWITTER_CONSUMER_KEY" "$TWITTER_CONSUMER_SECRET" "$TWITTER_ACCESS_TOKEN_KEY" "$TWITTER_ACCESS_TOKEN_SECRET" "$IG_UAT" "$IG_USER_ID"

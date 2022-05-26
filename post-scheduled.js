@@ -4,7 +4,7 @@ import fs from 'fs';
 import { parse } from 'csv-parse';
 import './env.js';
 
-const myArgs = process.argv.slice(2);
+const args = process.argv.slice(2);
 const nnMap = new Map();
 var daysNanoNarrative = '';
 var caption = '';
@@ -17,11 +17,13 @@ var options = {
     headers:  { connection:  "keep-alive" }
 };
 var client = new Twitter({
-  consumer_key: myArgs[0],
-  consumer_secret: myArgs[1],
-  access_token_key: myArgs[2],
-  access_token_secret: myArgs[3]
+  consumer_key: args[0],
+  consumer_secret: args[1],
+  access_token_key: args[2],
+  access_token_secret: args[3]
 });
+
+// Instagram ---------------------------->
 
 function getDate() {
   var today = new Date();
@@ -36,6 +38,43 @@ function getDate() {
   uniqueImageName = dd + mm + yyyy;
   console.log("Posting for " + caption);
   console.log("");
+}
+
+function setupFbGraph() {
+  console.log("  Setting user access token...");
+  graph.setAccessToken(args[4]);
+}
+
+function createMediaContainer() {
+  console.log("  Creating media container...");
+  var url = args[5] + '/media?image_url=' + imageLink + uniqueImageName + '.jpg' + '&caption=' + caption;
+  graph
+    .setOptions(options)
+    .post(url, function(err, res) {
+      if (err) {
+        console.log(err);
+      } else {
+        mediaContainerId = res.id;
+        postInstagram();
+      }
+    });
+}
+
+function postInstagram() {
+  console.log("  Publishing...");
+  var url = args[5] + '/media_publish?creation_id=' + mediaContainerId;
+  graph
+    .setOptions(options)
+    .post(url, function(err, res) {
+      console.log("  Published!");
+      publishTwitter();
+    });
+}
+
+function publishInstagram() {
+  console.log("Publishing on Instagram...");
+  setupFbGraph();
+  createMediaContainer();
 }
 
 // Twitter ---------------------------->
@@ -70,7 +109,7 @@ function publishTwitter() {
 
 function post() {
   getDate();
-  publishTwitter();
+  publishInstagram();
 }
 
 console.log("");
