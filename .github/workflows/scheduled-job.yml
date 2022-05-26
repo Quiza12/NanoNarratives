@@ -11,4 +11,7 @@ jobs:
         with:
           node-version: "16"
       - run: npm install
-      - run: node test.js
+      - env: 
+          SECRET: ${{ secrets.TEST }}
+        run: node test.js "$SECRET"
+        
