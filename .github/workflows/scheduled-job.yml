@@ -11,7 +11,9 @@ jobs:
         with:
           node-version: "16"
       - run: npm install
-      - env: 
-          SECRET: ${{ secrets.TEST }}
-        run: node test.js "$SECRET"
-        
+      - env:
+        TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
+        TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
+        TWITTER_ACCESS_TOKEN_KEY: ${{ secrets.TWITTER_ACCESS_TOKEN_KEY }}
+        TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+        run: node test.js "$TWITTER_CONSUMER_KEY" "$TWITTER_CONSUMER_SECRET" "$TWITTER_ACCESS_TOKEN_KEY" "$TWITTER_ACCESS_TOKEN_SECRET"
