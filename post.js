@@ -67,6 +67,7 @@ function postInstagram() {
     .setOptions(options)
     .post(url, function(err, res) {
       console.log("  Published!");
+      publishTwitter();
     });
 }
 
@@ -108,7 +109,6 @@ function publishTwitter() {
 
 function post() {
   getDate();
-  publishTwitter();
   publishInstagram();
 }
 
