@@ -109,6 +109,8 @@ function publishTwitter() {
   findDaysNarrative();
 }
 
+// Medium ---------------------------->
+
 function postMedium(mediumUserId, publicationId) {
   console.log("  Publishing...");
 
