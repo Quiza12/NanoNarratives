@@ -53,7 +53,7 @@ function createMediaContainer() {
     .setOptions(options)
     .post(url, function(err, res) {
       if (err) {
-        console.log(err);
+        throw err;
       } else {
         mediaContainerId = res.id;
         postInstagram();
