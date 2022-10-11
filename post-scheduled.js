@@ -39,6 +39,8 @@ function getDate() {
   uniqueImageName = dd + mm + yyyy;
   console.log("Posting for " + caption);
   console.log("");
+
+  publishInstagram();
 }
 
 function setupFbGraph() {
@@ -167,7 +169,6 @@ function publishMedium() {
 
 function post() {
   getDate();
-  publishInstagram();
 }
 
 console.log("");
