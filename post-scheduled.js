@@ -36,7 +36,7 @@ function getDate() {
   if (mm < 10) mm = '0' + mm;
 
   caption = dd + '/' + mm + '/' + yyyy;
-  uniqueImageName = dd.concat(mm).concat(yyyy);
+  uniqueImageName = dd + '' + mm + '' + yyyy;
   console.log("Posting for " + caption);
   console.log("");
 
