@@ -1,8 +1,6 @@
 name: Scheduled Job
 
-on:
-  schedule:
-    - cron: "0 9 * * *"
+on: push
 
 runs:
   using: 'node16'
