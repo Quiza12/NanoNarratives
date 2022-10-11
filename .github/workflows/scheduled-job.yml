@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: "0 9 * * *"
 
+runs:
+  using: 'node16'
+  main: 'post-scheduled.js'
+
+
 jobs:
   scheduled-job:
     runs-on: ubuntu-latest
