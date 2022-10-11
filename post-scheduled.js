@@ -51,6 +51,7 @@ function setupFbGraph() {
 function createMediaContainer() {
   console.log("  Creating media container...");
   console.log("  uniqueImageName..." + uniqueImageName);
+  console.log("  caption..." + caption);
   var url = args[5] + "/media?image_url=" + imageLink + uniqueImageName + ".jpg&caption=" + caption;
   graph
     .setOptions(options)
