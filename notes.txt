@@ -3,3 +3,8 @@ https://www.youtube.com/watch?v=m2Dr4L_Ab14
 on:
   schedule:
     - cron: "0 9 * * *"
+
+Regex to trim down:
+  1. \d+\.
+  2.  -
+  3. \.$
