@@ -4,6 +4,7 @@ import fs from 'fs';
 import { parse } from 'csv-parse';
 import './env.js';
 import fetch from 'node-fetch';
+import snoowrap from 'snoowrap';
 
 const args = process.argv.slice(2);
 const nnMap = new Map();
@@ -23,6 +24,12 @@ var client = new Twitter({
   access_token_key: args[2],
   access_token_secret: args[3]
 });
+var redditConfig = {
+  username: process.env.R_USERNAME,
+  password: process.env.R_PASSWORD,
+  clientId: process.env.R_CLIENT,
+  clientSecret: process.env.R_SECRET,
+}
 
 // Instagram ---------------------------->
 
@@ -128,7 +135,10 @@ function postMedium(mediumUserId, publicationId) {
     }),
   })
     .then(res => res.json())
-    .then(res => console.log("  Published!"));
+    .then(res => {
+      console.log("  Published!");
+      publishReddit();
+    });
 }
 
 function getPublication(mediumUserId) {
@@ -165,6 +175,23 @@ function publishMedium() {
   })
     .then(res => res.json())
     .then(res => getPublication(res.data.id));
+}
+
+// Reddit ---------------------------->
+
+function publishReddit() {
+  console.log("Publishing on Reddit...");
+  const r = new snoowrap({
+    userAgent: 'fd547db4-3227-429c-9ca5-34c23e07a60f',
+    clientId: redditConfig.clientId,
+    clientSecret: redditConfig.clientSecret,
+    username: redditConfig.username,
+    password: redditConfig.password,
+  })
+  r.getSubreddit("NanoNarratives").submitSelfpost({
+    title: caption,
+    text: daysNanoNarrative,
+  })
 }
 
 function post() {
