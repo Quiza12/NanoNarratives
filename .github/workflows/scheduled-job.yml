@@ -21,4 +21,8 @@ jobs:
           IG_UAT: ${{ secrets.IG_UAT }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           M_INTEGRATION_TOKEN: ${{ secrets.M_INTEGRATION_TOKEN }}
-        run: node post-scheduled.js "$TWITTER_CONSUMER_KEY" "$TWITTER_CONSUMER_SECRET" "$TWITTER_ACCESS_TOKEN_KEY" "$TWITTER_ACCESS_TOKEN_SECRET" "$IG_UAT" "$IG_USER_ID" "$M_INTEGRATION_TOKEN"
+          R_USERNAME: ${{ secrets.R_USERNAME }}
+          R_PASSWORD: ${{ secrets.R_PASSWORD }}
+          R_CLIENT: ${{ secrets.R_CLIENT }}
+          R_SECRET: ${{ secrets.R_SECRET }}
+        run: node post-scheduled.js "$TWITTER_CONSUMER_KEY" "$TWITTER_CONSUMER_SECRET" "$TWITTER_ACCESS_TOKEN_KEY" "$TWITTER_ACCESS_TOKEN_SECRET" "$IG_UAT" "$IG_USER_ID" "$M_INTEGRATION_TOKEN" "R_USERNAME" "R_PASSWORD" "R_CLIENT" "R_SECRET"

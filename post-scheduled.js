@@ -25,10 +25,10 @@ var client = new Twitter({
   access_token_secret: args[3]
 });
 var redditConfig = {
-  username: process.env.R_USERNAME,
-  password: process.env.R_PASSWORD,
-  clientId: process.env.R_CLIENT,
-  clientSecret: process.env.R_SECRET,
+  username: args[7],
+  password: args[8],
+  clientId: args[9],
+  clientSecret: args[10],
 }
 
 // Instagram ---------------------------->
