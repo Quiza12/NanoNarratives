@@ -11,7 +11,8 @@ const args = process.argv.slice(2);
 const nanoNarrativesSubreddit = "NanoNarratives";
 const nns = new Map([
   ["23/11/2022","The ‘Sit Here’ COVID stickers were deftly stripped off the train seats and placed on hands, faces and crotches by the gang of city-bound party-goers."],
-  ["24/11/2022","The Indian myna birds harassed the larger magpie, weighed down as it was with a discarded slice of Wonder White from the asphalt of a school playground."]
+  ["24/11/2022","The Indian myna birds harassed the larger magpie, weighed down as it was with a discarded slice of Wonder White from the asphalt of a school playground."],
+  ["25/11/2022","Taco Tuesday turned into Woozy Wednesday for Abe after a few too many tequilas."]
 ]);
 
 var redditConfig = {
