@@ -5,6 +5,6 @@ on:
     - cron: "0 9 * * *"
 
 Regex to trim down:
-  1. \d+\.
+  1. ^\d+\. 
   2.  -
   3. \.$
