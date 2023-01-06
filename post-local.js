@@ -130,9 +130,10 @@ function postMedium(mediumUserId, publicationId) {
     },
     body: JSON.stringify({
       contentFormat: 'markdown',
-      content: '# Nano Narrative \n ## ' + caption + ' \n ' + daysNanoNarrative,
+      content: '# Nano Narrative - ' + caption + ' \n ' + daysNanoNarrative,
       tags: ['Writing', 'Nano Narratives', 'Flash Fiction', 'Humor'],
       publishStatus: 'public',
+      notifyFollowers: true
     }),
   })
     .then(res => res.json())
