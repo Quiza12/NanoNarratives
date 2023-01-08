@@ -25,4 +25,8 @@ jobs:
           R_PASSWORD: ${{ secrets.R_PASSWORD }}
           R_CLIENT: ${{ secrets.R_CLIENT }}
           R_SECRET: ${{ secrets.R_SECRET }}
-        run: node post-scheduled.js "$TWITTER_CONSUMER_KEY" "$TWITTER_CONSUMER_SECRET" "$TWITTER_ACCESS_TOKEN_KEY" "$TWITTER_ACCESS_TOKEN_SECRET" "$IG_UAT" "$IG_USER_ID" "$M_INTEGRATION_TOKEN" "$R_USERNAME" "$R_PASSWORD" "$R_CLIENT" "$R_SECRET"
+          FB_PAT: ${{ secrets.FB_PAT }}
+          FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
+          E_USERNAME: ${{ secrets.E_USERNAME }}
+          E_PASSWORD: ${{ secrets.E_PASSWORD }}
+        run: node post-scheduled.js "$TWITTER_CONSUMER_KEY" "$TWITTER_CONSUMER_SECRET" "$TWITTER_ACCESS_TOKEN_KEY" "$TWITTER_ACCESS_TOKEN_SECRET" "$IG_UAT" "$IG_USER_ID" "$M_INTEGRATION_TOKEN" "$R_USERNAME" "$R_PASSWORD" "$R_CLIENT" "$R_SECRET" "$FB_PAT" "$FB_PAGE_ID" "$E_USERNAME" "$E_PASSWORD"

@@ -5,6 +5,7 @@ import { parse } from 'csv-parse';
 import './env.js';
 import fetch from 'node-fetch';
 import snoowrap from 'snoowrap';
+import nodemailer from 'nodemailer';
 
 const args = process.argv.slice(2);
 const nnMap = new Map();
@@ -210,6 +211,7 @@ function postFacebook() {
     .setOptions(options)
     .post(url, function(err, res) {
       console.log("  Published!");
+      sendEmail();
     });
 }
 
@@ -217,6 +219,38 @@ function publishFacebook() {
   console.log("Publishing on Facebook...");
   setupFbGraph();
   postFacebook();
+}
+
+// Emails ---------------------------->
+
+function sendEmail() {
+  console.log("Sending email to Mum and Dad...");
+
+  let transporter = nodemailer.createTransport({
+    host: 'smtp-mail.outlook.com',
+    port: 587,
+    auth: {
+        user: args[13],
+        pass: args[14]
+    }
+  })
+
+  let message = {
+    from: "Quiza12@live.com",
+    bcc: "Quiza12@live.com;querzolix5@gmail.com;david@qloans.net.au",
+    subject: "Nano Narrative - " + caption,
+    text: daysNanoNarrative
+  }
+
+  transporter.sendMail(message, function(err, info) {
+    console.log("  Sending...");
+    if (err) {
+      console.log(err)
+    } else {
+      console.log(info);
+      console.log("  Sent!");
+    }
+  })
 }
 
 // Start ---------------------------->
