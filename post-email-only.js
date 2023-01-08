@@ -1,10 +1,12 @@
 import nodemailer from 'nodemailer';
+import './env.js';
+
 let transporter = nodemailer.createTransport({
        host: 'smtp-mail.outlook.com',
        port: 587,
        auth: {
-           user: "Quiza12@live.com",
-           pass: "Th3yK33pD3athStaringM3DownImAlright!@#"
+           user: process.env.E_USERNAME,
+           pass: process.env.E_PASSWORD
        }
 })
 

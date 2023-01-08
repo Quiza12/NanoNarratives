@@ -200,12 +200,12 @@ function publishReddit() {
 
 function setupFbGraph() {
   console.log("  Setting page access token...");
-  graph.setAccessToken(process.env.FB_PAT);
+  graph.setAccessToken(args[11]);
 }
 
 function postFacebook() {
   console.log("  Publishing...");
-  var url = process.env.FB_PAGE_ID + '/photos?url=' + imageLink + uniqueImageName + '.jpg' + '&message=' + caption;
+  var url = args[12] + '/photos?url=' + imageLink + uniqueImageName + '.jpg' + '&message=' + caption;
   graph
     .setOptions(options)
     .post(url, function(err, res) {
