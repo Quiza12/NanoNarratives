@@ -49,7 +49,7 @@ function getDate() {
   publishInstagram();
 }
 
-function setupFbGraph() {
+function setupFbGraphForInstagram() {
   console.log("  Setting user access token...");
   graph.setAccessToken(process.env.IG_UAT);
 }
@@ -82,7 +82,7 @@ function postInstagram() {
 
 function publishInstagram() {
   console.log("Publishing on Instagram...");
-  setupFbGraph();
+  setupFbGraphForInstagram();
   createMediaContainer();
 }
 
@@ -194,7 +194,33 @@ function publishReddit() {
     title: caption,
     text: daysNanoNarrative,
   })
+  publishFacebook();
 }
+
+// Facebook ---------------------------->
+
+function setupFbGraphForFacebook() {
+  console.log("  Setting page access token...");
+  graph.setAccessToken(process.env.FB_PAT);
+}
+
+function postFacebook() {
+  console.log("  Publishing...");
+  var url = process.env.FB_PAGE_ID + '/photos?url=' + imageLink + uniqueImageName + '.jpg' + '&message=' + caption;
+  graph
+    .setOptions(options)
+    .post(url, function(err, res) {
+      console.log("  Published!");
+    });
+}
+
+function publishFacebook() {
+  console.log("Publishing on Facebook...");
+  setupFbGraphForFacebook();
+  postFacebook();
+}
+
+// Start ---------------------------->
 
 function post() {
   getDate();

@@ -193,7 +193,33 @@ function publishReddit() {
     title: caption,
     text: daysNanoNarrative,
   })
+  publishFacebook();
 }
+
+// Facebook ---------------------------->
+
+function setupFbGraph() {
+  console.log("  Setting page access token...");
+  graph.setAccessToken(process.env.FB_PAT);
+}
+
+function postFacebook() {
+  console.log("  Publishing...");
+  var url = process.env.FB_PAGE_ID + '/photos?url=' + imageLink + uniqueImageName + '.jpg' + '&message=' + caption;
+  graph
+    .setOptions(options)
+    .post(url, function(err, res) {
+      console.log("  Published!");
+    });
+}
+
+function publishFacebook() {
+  console.log("Publishing on Facebook...");
+  setupFbGraph();
+  postFacebook();
+}
+
+// Start ---------------------------->
 
 function post() {
   getDate();
