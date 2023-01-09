@@ -85,6 +85,7 @@ function postInstagram() {
 }
 
 function publishInstagram() {
+  console.log("");
   console.log("Publishing on Instagram...");
   setupFbGraphForInstagram();
   createMediaContainer();
@@ -117,6 +118,7 @@ function postTwitter() {
 }
 
 function publishTwitter() {
+  console.log("");
   console.log("Publishing on Twitter...");
   findDaysNarrative();
 }
@@ -168,6 +170,7 @@ function getPublicationFromList(data) {
 }
 
 function publishMedium() {
+  console.log("");
   console.log("Publishing on Medium...");
   console.log("  Getting user ID...");
 
@@ -186,6 +189,7 @@ function publishMedium() {
 // Reddit ---------------------------->
 
 function publishReddit() {
+  console.log("");
   console.log("Publishing on Reddit...");
   const r = new snoowrap({
     userAgent: 'fd547db4-3227-429c-9ca5-34c23e07a60f',
@@ -220,6 +224,7 @@ function postFacebook() {
 }
 
 function publishFacebook() {
+  console.log("");
   console.log("Publishing on Facebook...");
   setupFbGraphForFacebook();
   postFacebook();
@@ -228,6 +233,7 @@ function publishFacebook() {
 // Emails ---------------------------->
 
 function sendEmail() {
+  console.log("");
   console.log("Sending email to Mum and Dad...");
 
   let transporter = nodemailer.createTransport({
