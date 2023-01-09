@@ -1,8 +1,12 @@
 name: Scheduled Job
 
-on:
-  schedule:
-    - cron: "0 7 * * *"
+# on:
+#   schedule:
+#     - cron: "0 7 * * *"
+    # AEST: - cron: "0 8 * * *" 
+
+## On Commit 
+on: push
 
 jobs:
   scheduled-job:

@@ -32,7 +32,7 @@ var redditConfig = {
   clientSecret: args[10],
 }
 
-// Instagram ---------------------------->
+// General ---------------------------->
 
 function getDate() {
   var today = new Date();
@@ -51,7 +51,9 @@ function getDate() {
   publishInstagram();
 }
 
-function setupFbGraph() {
+// Instagram ---------------------------->
+
+function setupFbGraphForInstagram() {
   console.log("  Setting user access token...");
   graph.setAccessToken(args[4]);
 }
@@ -84,7 +86,7 @@ function postInstagram() {
 
 function publishInstagram() {
   console.log("Publishing on Instagram...");
-  setupFbGraph();
+  setupFbGraphForInstagram();
   createMediaContainer();
 }
 
@@ -118,6 +120,8 @@ function publishTwitter() {
   console.log("Publishing on Twitter...");
   findDaysNarrative();
 }
+
+// Medium ---------------------------->
 
 function postMedium(mediumUserId, publicationId) {
   console.log("  Publishing...");
@@ -199,7 +203,7 @@ function publishReddit() {
 
 // Facebook ---------------------------->
 
-function setupFbGraph() {
+function setupFbGraphForFacebook() {
   console.log("  Setting page access token...");
   graph.setAccessToken(args[11]);
 }
@@ -217,7 +221,7 @@ function postFacebook() {
 
 function publishFacebook() {
   console.log("Publishing on Facebook...");
-  setupFbGraph();
+  setupFbGraphForFacebook();
   postFacebook();
 }
 
