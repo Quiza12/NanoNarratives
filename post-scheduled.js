@@ -31,6 +31,11 @@ var redditConfig = {
   clientId: args[9],
   clientSecret: args[10],
 }
+let instagramSuccessful = false;
+let twitterSuccessful = false;
+let mediumSuccessful = false;
+let redditSuccessful = false;
+let facebookSuccessful = false;
 
 // General ---------------------------->
 
@@ -80,6 +85,7 @@ function postInstagram() {
     .setOptions(options)
     .post(url, function(err, res) {
       console.log("  Published!");
+      instagramSuccessful = true;
       publishTwitter();
     });
 }
@@ -113,6 +119,7 @@ function postTwitter() {
   client.post('statuses/update', { status: daysNanoNarrative },  function(error, tweet, response) {
     if(error) throw error;
     console.log("  Tweeted!");
+    twitterSuccessful = true;
     publishMedium();
   });
 }
@@ -137,7 +144,7 @@ function postMedium(mediumUserId, publicationId) {
     body: JSON.stringify({
       contentFormat: 'markdown',
       content: '# Nano Narrative - ' + caption + ' \n ' + daysNanoNarrative,
-      tags: ['Writing', 'Nano Narratives', 'Flash Fiction', 'Humor'],
+      tags: ['Writing', 'Nano Narratives', 'Flash Fiction'],
       publishStatus: 'public',
       notifyFollowers: true
     }),
@@ -145,6 +152,7 @@ function postMedium(mediumUserId, publicationId) {
     .then(res => res.json())
     .then(res => {
       console.log("  Published!");
+      mediumSuccessful = true;
       publishReddit();
     });
 }
@@ -203,6 +211,7 @@ function publishReddit() {
     text: daysNanoNarrative,
   })
   publishFacebook();
+  redditSuccessful = true;
 }
 
 // Facebook ---------------------------->
@@ -220,6 +229,7 @@ function postFacebook() {
     .post(url, function(err, res) {
       console.log("  Published!");
       sendEmail();
+      facebookSuccessful = true;
     });
 }
 
@@ -249,7 +259,18 @@ function sendEmail() {
     from: "Quiza12@live.com",
     bcc: "Quiza12@live.com;querzolix5@gmail.com;david@qloans.net.au",
     subject: "Nano Narrative - " + caption,
-    text: daysNanoNarrative
+    html: 
+      `
+      <h3>${caption}</h3>
+      <br />
+      <em>${daysNanoNarrative}</em>
+      <br />
+      <p>${instagramSuccessful ? '✅' : '❌'} <b>Instagram</b></p>
+      <p>${twitterSuccessful ? '✅' : '❌'} <b>Twitter</b></p>
+      <p>${mediumSuccessful ? '✅' : '❌'} <b>Medium</b></p>
+      <p>${redditSuccessful ? '✅' : '❌'} <b>Reddit</b></p>
+      <p>${facebookSuccessful ? '✅' : '❌'} <b>Facebook</b></p>
+      `
   }
 
   transporter.sendMail(message, function(err, info) {
