@@ -228,8 +228,8 @@ function postFacebook() {
     .setOptions(options)
     .post(url, function(err, res) {
       console.log("  Published!");
-      sendEmail();
       facebookSuccessful = true;
+      sendEmail();
     });
 }
 
