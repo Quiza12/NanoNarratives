@@ -261,15 +261,13 @@ function sendEmail() {
     subject: "Nano Narrative - " + caption,
     html: 
       `
-      <h3>${caption}</h3>
+      <h3 style="text-align: center;"><em>${daysNanoNarrative}</em></h3>
       <br />
-      <em>${daysNanoNarrative}</em>
-      <br />
-      <p>${instagramSuccessful ? '✅' : '❌'} <b>Instagram</b></p>
-      <p>${twitterSuccessful ? '✅' : '❌'} <b>Twitter</b></p>
-      <p>${mediumSuccessful ? '✅' : '❌'} <b>Medium</b></p>
-      <p>${redditSuccessful ? '✅' : '❌'} <b>Reddit</b></p>
-      <p>${facebookSuccessful ? '✅' : '❌'} <b>Facebook</b></p>
+      <p style="text-align: center;">${instagramSuccessful ? '✅' : '❌'} Instagram</p>
+      <p style="text-align: center;">${twitterSuccessful ? '✅' : '❌'} Twitter</p>
+      <p style="text-align: center;">${mediumSuccessful ? '✅' : '❌'} Medium</p>
+      <p style="text-align: center;">${redditSuccessful ? '✅' : '❌'} Reddit</p>
+      <p style="text-align: center;">${facebookSuccessful ? '✅' : '❌'} Facebook</p>
       `
   }
 

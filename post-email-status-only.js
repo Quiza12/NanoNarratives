@@ -12,6 +12,7 @@ let transporter = nodemailer.createTransport({
 
 let instagramSuccessful = true;
 let twitterSuccessful = true;
+let mediumSuccessful = true;
 let redditSuccessful = true;
 let facebookSuccessful = true;
 let emailSuccessful = false;
@@ -21,22 +22,20 @@ let nanoNarrative = "The third time her running shoes got soaked, Nadia forwent 
 
 let body = 
 `
-<h3>${date}</h3>
+<h3 style="text-align: center;"><em>${nanoNarrative}</em></h3>
 <br />
-<em>${nanoNarrative}</em>
-<br />
-<p>${instagramSuccessful ? '✅' : '❌'} <b>Instagram</b></p>
-<p>${twitterSuccessful ? '✅' : '❌'} <b>Twitter</b></p>
-<p>${redditSuccessful ? '✅' : '❌'} <b>Reddit</b></p>
-<p>${facebookSuccessful ? '✅' : '❌'} <b>Facebook</b></p>
-<p>${emailSuccessful ? '✅' : '❌'} <b>Email</b></p>
+<p style="text-align: center;">${instagramSuccessful ? '✅' : '❌'} Instagram</p>
+<p style="text-align: center;">${twitterSuccessful ? '✅' : '❌'} Twitter</p>
+<p style="text-align: center;">${mediumSuccessful ? '✅' : '❌'} Medium</p>
+<p style="text-align: center;">${redditSuccessful ? '✅' : '❌'} Reddit</p>
+<p style="text-align: center;">${facebookSuccessful ? '✅' : '❌'} Facebook</p>
 `;
 
 let message = {
   from: "Quiza12@live.com",
   bcc: "Quiza12@live.com",
   // bcc: "Quiza12@live.com;querzolix5@gmail.com;david@qloans.net.au",
-  subject: "Nano Narrative - 10/01/2023",
+  subject: "Nano Narrative - TEST",
   html: body 
 }
 transporter.sendMail(message, function(err, info) {
