@@ -22,7 +22,7 @@ let nanoNarrative = "The third time her running shoes got soaked, Nadia forwent 
 
 let body = 
 `
-<h3 style="text-align: center;"><em>${nanoNarrative}</em></h3>
+<p style="text-align: center; font-size: 16px;">${nanoNarrative}</p>
 <br />
 <p style="text-align: center;">${instagramSuccessful ? '✅' : '❌'} Instagram</p>
 <p style="text-align: center;">${twitterSuccessful ? '✅' : '❌'} Twitter</p>
