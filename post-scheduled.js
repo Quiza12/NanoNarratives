@@ -116,12 +116,18 @@ function findDaysNarrative() {
 
 function postTwitter() {
   console.log("  Tweeting...");
-  client.post('statuses/update', { status: daysNanoNarrative },  function(error, tweet, response) {
-    if(error) throw error;
-    console.log("  Tweeted!");
-    twitterSuccessful = true;
+  if (!daysNanoNarrative.length > 280) {
+    client.post('statuses/update', { status: daysNanoNarrative },  function(error, tweet, response) {
+      if(error) throw error;
+      console.log("  Tweeted!");
+      twitterSuccessful = true;
+      publishMedium();
+    });
+  } else {
+    twitterSuccessful = false;
     publishMedium();
-  });
+  }
+  
 }
 
 function publishTwitter() {
