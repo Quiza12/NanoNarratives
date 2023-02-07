@@ -116,7 +116,7 @@ function findDaysNarrative() {
 
 function postTwitter() {
   console.log("  Tweeting...");
-  if (!daysNanoNarrative.length > 280) {
+  if (daysNanoNarrative.length <= 280) {
     client.post('statuses/update', { status: daysNanoNarrative },  function(error, tweet, response) {
       if(error) throw error;
       console.log("  Tweeted!");
