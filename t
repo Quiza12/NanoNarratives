@@ -1,4 +1,3 @@
-31/03/2023,"According to her LinkedIn, Cynthia Hudson had previously been a lover, a fighter, a dancer, a barista, a barrister and an investment development and research analyst."
 01/04/2023,"Lionel was hedging his post-death bets by signing up to all the major religions beforehand. Plus some minor ones, just to be safe."
 02/04/2023,"The scam artist was more of an apprentice, though he aspired to greater heights."
 03/04/2023,"Lazy Susan couldn't be arsed going to the Chinese restaurant for dinner; she had it delivered instead."
