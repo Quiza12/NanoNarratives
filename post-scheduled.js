@@ -84,8 +84,13 @@ function postInstagram() {
   graph
     .setOptions(options)
     .post(url, function(err, res) {
-      console.log("  Published!");
-      instagramSuccessful = true;
+      if (err) {
+        console.log("  Not published to Instagram: " + err.message);
+        instagramSuccessful = false;
+      } else {
+        console.log("  Published!");
+        instagramSuccessful = true;
+      }
       publishTwitter();
     });
 }
@@ -118,16 +123,20 @@ function postTwitter() {
   console.log("  Tweeting...");
   if (daysNanoNarrative.length <= 280) {
     client.post('statuses/update', { status: daysNanoNarrative },  function(error, tweet, response) {
-      if(error) throw error;
-      console.log("  Tweeted!");
-      twitterSuccessful = true;
+      if (error) {
+        console.log("  Not published to Twitter: " + error.detail);
+        twitterSuccessful = false;
+      } else {
+        console.log("  Tweeted!");
+        twitterSuccessful = true;
+      }
       publishMedium();
     });
   } else {
     twitterSuccessful = false;
+    console.log("  Not published to Twitter - Tweet too long, need to manually post twice.");
     publishMedium();
   }
-  
 }
 
 function publishTwitter() {
@@ -157,8 +166,13 @@ function postMedium(mediumUserId, publicationId) {
   })
     .then(res => res.json())
     .then(res => {
-      console.log("  Published!");
-      mediumSuccessful = true;
+      if (!res.ok) {
+        console.log("  Not published to Medium: " + res);
+        mediumSuccessful = false;
+      } else {
+        console.log("  Published!");
+        mediumSuccessful = true;
+      }
       publishReddit();
     });
 }
@@ -233,8 +247,13 @@ function postFacebook() {
   graph
     .setOptions(options)
     .post(url, function(err, res) {
-      console.log("  Published!");
-      facebookSuccessful = true;
+      if (err) {
+        console.log("  Not published to Facebook: " + err.message);
+        facebookSuccessful = false;
+      } else {
+        console.log("  Published!");
+        facebookSuccessful = true;
+      }
       sendEmail();
     });
 }
@@ -280,7 +299,7 @@ function sendEmail() {
   transporter.sendMail(message, function(err, info) {
     console.log("  Sending...");
     if (err) {
-      console.log(err)
+      console.log("  Email not sent: " + err)
     } else {
       console.log("  Sent!");
     }
