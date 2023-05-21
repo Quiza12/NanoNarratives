@@ -19,7 +19,7 @@ var options = {
     pool:     { maxSockets:  Infinity },
     headers:  { connection:  "keep-alive" }
 };
-var client = new Twitter({
+var twitterClient = new Twitter({
   consumer_key: args[0],
   consumer_secret: args[1],
   access_token_key: args[2],
@@ -122,7 +122,7 @@ function findDaysNarrative() {
 function postTwitter() {
   console.log("  Tweeting...");
   if (daysNanoNarrative.length <= 280) {
-    client.post('statuses/update', { status: daysNanoNarrative },  function(error, tweet, response) {
+    twitterClient.post('statuses/update', { status: daysNanoNarrative },  function(error, tweet, response) {
       if (error) {
         console.log("  Not published to Twitter: " + error.detail);
         twitterSuccessful = false;
