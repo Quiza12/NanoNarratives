@@ -166,8 +166,8 @@ function postMedium(mediumUserId, publicationId) {
   })
     .then(res => res.json())
     .then(res => {
-      if (!res.ok) {
-        console.log("  Not published to Medium: " + res);
+      if (!res.data) {
+        console.log("  Not published to Medium: " + res.errors[0].message);
         mediumSuccessful = false;
       } else {
         console.log("  Published!");

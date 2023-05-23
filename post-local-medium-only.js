@@ -7,6 +7,7 @@ const nnMap = new Map();
 var daysNanoNarrative = '';
 var caption = '';
 var uniqueImageName = '';
+let mediumSuccessful = false;
 
 // General ---------------------------->
 
@@ -57,13 +58,19 @@ function postMedium(mediumUserId, publicationId) {
       contentFormat: 'markdown',
       content: '# TEST: Nano Narrative - ' + caption + ' \n ' + daysNanoNarrative,
       tags: ['Writing', 'Nano Narratives', 'Flash Fiction'],
-      publishStatus: 'public',
+      publishStatus: 'publicv',
       notifyFollowers: 'true'
     }),
   })
     .then(res => res.json())
     .then(res => {
-      console.log("  Published!");
+      if (!res.data) {
+        console.log("  Not published to Medium: " + res.errors[0].message);
+        mediumSuccessful = false;
+      } else {
+        console.log("  Published!");
+        mediumSuccessful = true;
+      }
     });
 }
 
