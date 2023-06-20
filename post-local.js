@@ -6,6 +6,12 @@ import './env.js';
 import fetch from 'node-fetch';
 import snoowrap from 'snoowrap';
 
+var postToInstagram = false;
+var postToTwitter = false;
+var postToMedium = true;
+var postToReddit = true;
+var postToFacebook = true;
+
 const nnMap = new Map();
 var daysNanoNarrative = '';
 var caption = '';
@@ -57,7 +63,8 @@ function setupFbGraphForInstagram() {
 function createMediaContainer() {
   console.log("  Creating media container...");
   var url = process.env.IG_USER_ID + '/media?image_url=' + imageLink + uniqueImageName + '.jpg' + '&caption=' + caption;
-  graph
+  if (postToInstagram) {
+    graph
     .setOptions(options)
     .post(url, function(err, res) {
       if (err) {
@@ -67,6 +74,9 @@ function createMediaContainer() {
         postInstagram();
       }
     });
+  } else {
+    postInstagram();
+  }
 }
 
 function postInstagram() {
@@ -105,11 +115,15 @@ function findDaysNarrative() {
 
 function postTwitter() {
   console.log("  Tweeting...");
-  client.post('statuses/update', { status: daysNanoNarrative },  function(error, tweet, response) {
-    if(error) throw error;
-    console.log("  Tweeted!");
+  if (postToTwitter) {
+    client.post('statuses/update', { status: daysNanoNarrative },  function(error, tweet, response) {
+      if(error) throw error;
+      console.log("  Tweeted!");
+      publishMedium();
+    });
+  } else {
     publishMedium();
-  });
+  }
 }
 
 function publishTwitter() {
@@ -122,7 +136,8 @@ function publishTwitter() {
 function postMedium(mediumUserId, publicationId) {
   console.log("  Publishing...");
 
-  fetch('https://api.medium.com/v1/publications/' + publicationId + '/posts', {
+  if (postToMedium) {
+    fetch('https://api.medium.com/v1/publications/' + publicationId + '/posts', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -141,6 +156,10 @@ function postMedium(mediumUserId, publicationId) {
       console.log("  Published!");
       publishReddit();
     });
+  } else {
+    publishReddit();
+  }
+  
 }
 
 function getPublication(mediumUserId) {
@@ -190,11 +209,16 @@ function publishReddit() {
     username: redditConfig.username,
     password: redditConfig.password,
   })
-  r.getSubreddit("NanoNarratives").submitSelfpost({
-    title: caption,
-    text: daysNanoNarrative,
-  })
-  publishFacebook();
+
+  if (postToReddit) {
+    r.getSubreddit("NanoNarratives").submitSelfpost({
+      title: caption,
+      text: daysNanoNarrative,
+    })
+    publishFacebook();
+  } else {
+    publishFacebook();
+  }
 }
 
 // Facebook ---------------------------->
@@ -207,11 +231,13 @@ function setupFbGraphForFacebook() {
 function postFacebook() {
   console.log("  Publishing...");
   var url = process.env.FB_PAGE_ID + '/photos?url=' + imageLink + uniqueImageName + '.jpg' + '&message=' + caption;
-  graph
+  if (postToFacebook) {
+    graph
     .setOptions(options)
     .post(url, function(err, res) {
       console.log("  Published!");
     });
+  }
 }
 
 function publishFacebook() {
