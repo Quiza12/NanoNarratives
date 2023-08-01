@@ -17,8 +17,8 @@ let redditSuccessful = true;
 let facebookSuccessful = true;
 let emailSuccessful = false;
 
-let date = "10/01/2023";
-let nanoNarrative = "The third time her running shoes got soaked, Nadia forwent them altogether for a while. The lady who next gave her a pedicure got more than she bargained for with the strength of her soles.";
+let date = "28/06/2023";
+let nanoNarrative = "She was an everyday romantic; she purchased flowers at random intervals, lit candles in the bedroom in the middle of the week, and stashed love letters in her girlfriend's handbag before she left for work in the morning.";
 
 let body = 
 `
@@ -33,9 +33,9 @@ let body =
 
 let message = {
   from: "Quiza12@live.com",
-  bcc: "Quiza12@live.com",
-  // bcc: "Quiza12@live.com;querzolix5@gmail.com;david@qloans.net.au",
-  subject: "Nano Narrative - TEST",
+  // bcc: "Quiza12@live.com",
+  bcc: "Quiza12@live.com;querzolix5@gmail.com;david@qloans.net.au",
+  subject: "Nano Narrative - " + date,
   html: body 
 }
 transporter.sendMail(message, function(err, info) {

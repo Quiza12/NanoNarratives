@@ -5,12 +5,20 @@ import { parse } from 'csv-parse';
 import './env.js';
 import fetch from 'node-fetch';
 import snoowrap from 'snoowrap';
+import nodemailer from 'nodemailer';
 
 var postToInstagram = false;
 var postToTwitter = false;
-var postToMedium = true;
-var postToReddit = true;
-var postToFacebook = true;
+var postToMedium = false;
+var postToReddit = false;
+var postToFacebook = false;
+var postToEmail = true;
+
+let instagramSuccessful = true;
+let twitterSuccessful = true;
+let mediumSuccessful = true;
+let redditSuccessful = true;
+let facebookSuccessful = true;
 
 const nnMap = new Map();
 var daysNanoNarrative = '';
@@ -86,6 +94,7 @@ function postInstagram() {
     .setOptions(options)
     .post(url, function(err, res) {
       console.log("  Published!");
+      instagramSuccessful = true;
       publishTwitter();
     });
 }
@@ -119,6 +128,7 @@ function postTwitter() {
     client.post('statuses/update', { status: daysNanoNarrative },  function(error, tweet, response) {
       if(error) throw error;
       console.log("  Tweeted!");
+      twitterSuccessful = true;
       publishMedium();
     });
   } else {
@@ -154,6 +164,7 @@ function postMedium(mediumUserId, publicationId) {
     .then(res => res.json())
     .then(res => {
       console.log("  Published!");
+      mediumSuccessful = true;
       publishReddit();
     });
   } else {
@@ -201,22 +212,23 @@ function publishMedium() {
 // Reddit ---------------------------->
 
 function publishReddit() {
-  console.log("Publishing on Reddit...");
-  const r = new snoowrap({
-    userAgent: 'fd547db4-3227-429c-9ca5-34c23e07a60f',
-    clientId: redditConfig.clientId,
-    clientSecret: redditConfig.clientSecret,
-    username: redditConfig.username,
-    password: redditConfig.password,
-  })
-
   if (postToReddit) {
+    console.log("Publishing on Reddit...");
+    const r = new snoowrap({
+      userAgent: 'fd547db4-3227-429c-9ca5-34c23e07a60f',
+      clientId: redditConfig.clientId,
+      clientSecret: redditConfig.clientSecret,
+      username: redditConfig.username,
+      password: redditConfig.password,
+    })
     r.getSubreddit("NanoNarratives").submitSelfpost({
       title: caption,
       text: daysNanoNarrative,
     })
     publishFacebook();
+    redditSuccessful = true;
   } else {
+    console.log("Skipping publishing on Reddit...");
     publishFacebook();
   }
 }
@@ -236,7 +248,12 @@ function postFacebook() {
     .setOptions(options)
     .post(url, function(err, res) {
       console.log("  Published!");
+      facebookSuccessful = true;
+      sendEmail();
     });
+  } else {
+    console.log("Skipping publishing on Facebook...");
+    sendEmail();
   }
 }
 
@@ -244,6 +261,49 @@ function publishFacebook() {
   console.log("Publishing on Facebook...");
   setupFbGraphForFacebook();
   postFacebook();
+}
+
+// Emails ---------------------------->
+
+function sendEmail() {
+  if (postToEmail) {
+    console.log("");
+    console.log("Sending email to Mum and Dad...");
+  
+    let transporter = nodemailer.createTransport({
+      host: 'smtp-mail.outlook.com',
+      port: 587,
+      auth: {
+          user: process.env.E_USERNAME,
+          pass: process.env.E_PASSWORD
+      }
+    })
+  
+    let message = {
+      from: "Quiza12@live.com",
+      bcc: "Quiza12@live.com;querzolix5@gmail.com;david@qloans.net.au",
+      subject: "Nano Narrative - " + caption,
+      html: 
+        `
+        <p style="text-align: center; font-size: 16px;">${daysNanoNarrative}</p>
+        <br />
+        <p style="text-align: center;">${instagramSuccessful ? '✅' : '❌'} Instagram</p>
+        <p style="text-align: center;">${twitterSuccessful ? '✅' : '❌'} Twitter</p>
+        <p style="text-align: center;">${mediumSuccessful ? '✅' : '❌'} Medium</p>
+        <p style="text-align: center;">${redditSuccessful ? '✅' : '❌'} Reddit</p>
+        <p style="text-align: center;">${facebookSuccessful ? '✅' : '❌'} Facebook</p>
+        `
+    }
+  
+    transporter.sendMail(message, function(err, info) {
+      console.log("  Sending...");
+      if (err) {
+        console.log("  Email not sent: " + err)
+      } else {
+        console.log("  Sent!");
+      }
+    })
+  }
 }
 
 // Start ---------------------------->
