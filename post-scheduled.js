@@ -155,6 +155,7 @@ function postMedium(mediumUserId, publicationId) {
     headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + args[6],
+      cookie: 'clientId=mq'
     },
     body: JSON.stringify({
       contentFormat: 'markdown',

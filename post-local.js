@@ -10,9 +10,9 @@ import nodemailer from 'nodemailer';
 var postToInstagram = false;
 var postToTwitter = false;
 var postToMedium = false;
-var postToReddit = false;
-var postToFacebook = false;
-var postToEmail = true;
+var postToReddit = true;
+var postToFacebook = true;
+var postToEmail = false;
 
 let instagramSuccessful = true;
 let twitterSuccessful = true;
@@ -152,6 +152,7 @@ function postMedium(mediumUserId, publicationId) {
     headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + process.env.M_INTEGRATION_TOKEN,
+      cookie: 'clientId=mq'
     },
     body: JSON.stringify({
       contentFormat: 'markdown',
