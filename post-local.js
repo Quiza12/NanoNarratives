@@ -12,7 +12,7 @@ var postToTwitter = false;
 var postToMedium = false;
 var postToReddit = true;
 var postToFacebook = true;
-var postToEmail = false;
+var postToEmail = true;
 
 let instagramSuccessful = true;
 let twitterSuccessful = true;
@@ -177,11 +177,14 @@ function postMedium(mediumUserId, publicationId) {
 function getPublication(mediumUserId) {
   console.log("  Getting publication ID...");
 
+  console.log("  Medium userId: " + mediumUserId);
+
   fetch('https://api.medium.com/v1/users/' + mediumUserId  + '/publications', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + process.env.M_INTEGRATION_TOKEN,
+      cookie: 'clientId=mq'
     },
   })
     .then(res => res.json())
@@ -196,18 +199,24 @@ function getPublicationFromList(data) {
 
 function publishMedium() {
   console.log("Publishing on Medium...");
-  console.log("  Getting user ID...");
 
+  if (postToMedium) {
+    console.log("  Getting user ID...");
 
-  fetch('https://api.medium.com/v1/me', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + process.env.M_INTEGRATION_TOKEN,
-    },
-  })
-    .then(res => res.json())
-    .then(res => getPublication(res.data.id));
+    fetch('https://api.medium.com/v1/me', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + process.env.M_INTEGRATION_TOKEN,
+      },
+    })
+      .then(res => res.json())
+      .then(res => getPublication(res.data.id));
+  } else {
+    console.log("Skipping publishing on Medium...");
+    publishReddit();
+  }
+  
 }
 
 // Reddit ---------------------------->
