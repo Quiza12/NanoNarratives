@@ -290,12 +290,12 @@ function sendEmail() {
       <p style="text-align: center; font-size: 16px;">${daysNanoNarrative}</p>
       <br />
       <p style="text-align: center;">${instagramSuccessful ? '✅' : '❌'} Instagram</p>
-      <p style="text-align: center;">${twitterSuccessful ? '✅' : '❌'} Twitter</p>
       <p style="text-align: center;">${mediumSuccessful ? '✅' : '❌'} Medium</p>
       <p style="text-align: center;">${redditSuccessful ? '✅' : '❌'} Reddit</p>
       <p style="text-align: center;">${facebookSuccessful ? '✅' : '❌'} Facebook</p>
       `
   }
+  //<p style="text-align: center;">${twitterSuccessful ? '✅' : '❌'} Twitter</p>
 
   transporter.sendMail(message, function(err, info) {
     console.log("  Sending...");
