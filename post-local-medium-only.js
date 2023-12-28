@@ -47,20 +47,24 @@ function findDaysNarrative() {
 
 function postMedium(mediumUserId, publicationId) {
   console.log("  Publishing...");
+  
+  let json = JSON.stringify({
+    contentFormat: 'markdown',
+    content: '# TEST: Nano Narrative - ' + caption + ' \n ' + daysNanoNarrative,
+    tags: ['Writing', 'Nano Narratives', 'Flash Fiction'],
+    publishStatus: 'publicv',
+    notifyFollowers: 'true'
+  });
+  console.log(json);
 
-  fetch('https://api.medium.com/v1/publications/' + publicationId + '/posts', {
+  try {
+    fetch('https://api.medium.com/v1/publications/' + publicationId + '/posts', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + process.env.M_INTEGRATION_TOKEN,
     },
-    body: JSON.stringify({
-      contentFormat: 'markdown',
-      content: '# TEST: Nano Narrative - ' + caption + ' \n ' + daysNanoNarrative,
-      tags: ['Writing', 'Nano Narratives', 'Flash Fiction'],
-      publishStatus: 'publicv',
-      notifyFollowers: 'true'
-    }),
+    body: json,
   })
     .then(res => res.json())
     .then(res => {
@@ -72,6 +76,11 @@ function postMedium(mediumUserId, publicationId) {
         mediumSuccessful = true;
       }
     });
+  } catch(e) {
+    console.log("  Not published to Medium: " + e);
+    mediumSuccessful = false;
+  }
+  
 }
 
 function getPublication(mediumUserId) {

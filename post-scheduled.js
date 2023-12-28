@@ -150,32 +150,39 @@ function publishTwitter() {
 function postMedium(mediumUserId, publicationId) {
   console.log("  Publishing...");
 
-  fetch('https://api.medium.com/v1/publications/' + publicationId + '/posts', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + args[6],
-      cookie: 'clientId=mq'
-    },
-    body: JSON.stringify({
-      contentFormat: 'markdown',
-      content: '# Nano Narrative - ' + caption + ' \n ' + daysNanoNarrative,
-      tags: ['Writing', 'Nano Narratives', 'Flash Fiction'],
-      publishStatus: 'public',
-      notifyFollowers: true
-    }),
-  })
-    .then(res => res.json())
-    .then(res => {
-      if (!res.data) {
-        console.log("  Not published to Medium: " + res.errors[0].message);
-        mediumSuccessful = false;
-      } else {
-        console.log("  Published!");
-        mediumSuccessful = true;
-      }
-      publishReddit();
-    });
+  try {
+    fetch('https://api.medium.com/v1/publications/' + publicationId + '/posts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + args[6],
+        cookie: 'clientId=mq'
+      },
+      body: JSON.stringify({
+        contentFormat: 'markdown',
+        content: '# Nano Narrative - ' + caption + ' \n ' + daysNanoNarrative,
+        tags: ['Writing', 'Nano Narratives', 'Flash Fiction'],
+        publishStatus: 'public',
+        notifyFollowers: true
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (!res.data) {
+          console.log("  Not published to Medium: " + res.errors[0].message);
+          mediumSuccessful = false;
+        } else {
+          console.log("  Published!");
+          mediumSuccessful = true;
+        }
+        publishReddit();
+      });
+  } catch(error) {
+    console.log("  Not published to Medium: " + error);
+    mediumSuccessful = false;
+    publishReddit();
+  }
+  
 }
 
 function getPublication(mediumUserId) {

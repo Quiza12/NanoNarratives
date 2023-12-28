@@ -57,6 +57,11 @@ function getDate() {
 
   caption = dd + '/' + mm + '/' + yyyy;
   uniqueImageName = dd + '' + mm + '' + yyyy;
+
+  //overrides
+  //caption = '28/12/2023';
+  //uniqueImageName = '28122023';
+
   console.log("Posting for " + caption);
   console.log("");
 
@@ -83,6 +88,7 @@ function createMediaContainer() {
       }
     });
   } else {
+    console.log("Skipping posting on Instagram...");
     postInstagram();
   }
 }
@@ -203,15 +209,21 @@ function publishMedium() {
   if (postToMedium) {
     console.log("  Getting user ID...");
 
-    fetch('https://api.medium.com/v1/me', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + process.env.M_INTEGRATION_TOKEN,
-      },
-    })
-      .then(res => res.json())
-      .then(res => getPublication(res.data.id));
+    try {
+      fetch('https://api.medium.com/v1/me', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + process.env.M_INTEGRATION_TOKEN,
+        },
+      })
+        .then(res => res.json())
+        .then(res => getPublication(res.data.id));
+    } catch(error) {
+        console.log("  Not published to Medium: " + error);
+        mediumSuccessful = false;
+        publishReddit();
+    }
   } else {
     console.log("Skipping publishing on Medium...");
     publishReddit();
