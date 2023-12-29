@@ -59,8 +59,8 @@ function getDate() {
   uniqueImageName = dd + '' + mm + '' + yyyy;
 
   //overrides
-  //caption = '28/12/2023';
-  //uniqueImageName = '28122023';
+  // caption = '29/12/2023';
+  // uniqueImageName = '29122023';
 
   console.log("Posting for " + caption);
   console.log("");

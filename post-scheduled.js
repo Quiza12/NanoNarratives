@@ -37,6 +37,8 @@ let mediumSuccessful = false;
 let redditSuccessful = false;
 let facebookSuccessful = false;
 
+let postToMedium = false;
+
 // General ---------------------------->
 
 function getDate() {
@@ -206,20 +208,27 @@ function getPublicationFromList(data) {
 }
 
 function publishMedium() {
-  console.log("");
-  console.log("Publishing on Medium...");
-  console.log("  Getting user ID...");
-
-
-  fetch('https://api.medium.com/v1/me', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + args[6],
-    },
-  })
-    .then(res => res.json())
-    .then(res => getPublication(res.data.id));
+  if (postToMedium) {
+    console.log("");
+    console.log("Publishing on Medium...");
+    console.log("  Getting user ID...");
+  
+  
+    fetch('https://api.medium.com/v1/me', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + args[6],
+      },
+    })
+      .then(res => res.json())
+      .then(res => getPublication(res.data.id));
+  } else {
+    console.log("");
+    console.log("Skipping publishing on Medium...");
+    publishReddit();
+  }
+  
 }
 
 // Reddit ---------------------------->
