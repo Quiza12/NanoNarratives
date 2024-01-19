@@ -22,6 +22,11 @@ function getDate() {
 
   caption = dd + '/' + mm + '/' + yyyy;
   uniqueImageName = dd + '' + mm + '' + yyyy;
+
+  //overrides
+  caption = '29/12/2023';
+  uniqueImageName = '29122023';
+
   console.log("Posting for " + caption);
   console.log("");
 
@@ -52,10 +57,9 @@ function postMedium(mediumUserId, publicationId) {
     contentFormat: 'markdown',
     content: '# TEST: Nano Narrative - ' + caption + ' \n ' + daysNanoNarrative,
     tags: ['Writing', 'Nano Narratives', 'Flash Fiction'],
-    publishStatus: 'publicv',
+    publishStatus: 'public',
     notifyFollowers: 'true'
   });
-  console.log(json);
 
   try {
     fetch('https://api.medium.com/v1/publications/' + publicationId + '/posts', {
@@ -66,12 +70,14 @@ function postMedium(mediumUserId, publicationId) {
     },
     body: json,
   })
-    .then(res => res.json())
+    // .then(res => res.json())
     .then(res => {
-      if (!res.data) {
+      if (!res.text()) {
         console.log("  Not published to Medium: " + res.errors[0].message);
         mediumSuccessful = false;
       } else {
+        console.log(res);
+        console.log(res.status);
         console.log("  Published!");
         mediumSuccessful = true;
       }
