@@ -10,8 +10,8 @@ import nodemailer from 'nodemailer';
 var postToInstagram = false;
 var postToTwitter = false;
 var postToMedium = false;
-var postToReddit = true;
-var postToFacebook = true;
+var postToReddit = false;
+var postToFacebook = false;
 var postToEmail = true;
 
 let instagramSuccessful = true;
