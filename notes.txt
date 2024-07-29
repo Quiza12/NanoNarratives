@@ -5,6 +5,7 @@ on:
     - cron: "0 9 * * *"
 
 Regex to trim down:
-  1. ^\d+\. 
+  1. ^$\n - remove empty lines (first need to remove the extra spaces)
+  2. ^- 
   2. 4 - 
   3. $
