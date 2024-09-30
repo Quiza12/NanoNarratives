@@ -4,6 +4,7 @@ import './env.js';
 let transporter = nodemailer.createTransport({
        host: 'smtp.purelymail.com',
        port: 465,
+       secure: true,
        auth: {
            user: process.env.E_USERNAME,
            pass: process.env.E_PASSWORD

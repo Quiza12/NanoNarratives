@@ -289,8 +289,8 @@ function sendEmail() {
   console.log("Sending email to Mum and Dad...");
 
   let transporter = nodemailer.createTransport({
-    host: 'smtp-mail.outlook.com',
-    port: 587,
+    host: 'smtp.purelymail.com',
+    port: 465,
     auth: {
         user: args[13],
         pass: args[14]
