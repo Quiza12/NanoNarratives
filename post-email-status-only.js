@@ -2,12 +2,12 @@ import nodemailer from 'nodemailer';
 import './env.js';
 
 let transporter = nodemailer.createTransport({
-       host: 'smtp-mail.outlook.com',
-       port: 587,
-       auth: {
-           user: process.env.E_USERNAME,
-           pass: process.env.E_PASSWORD
-       }
+  host: 'smtp.purelymail.com',
+  port: 465,
+  auth: {
+      user: process.env.E_USERNAME,
+      pass: process.env.E_PASSWORD
+  }
 })
 
 let instagramSuccessful = true;
@@ -17,8 +17,8 @@ let redditSuccessful = true;
 let facebookSuccessful = true;
 let emailSuccessful = false;
 
-let date = "28/06/2023";
-let nanoNarrative = "She was an everyday romantic; she purchased flowers at random intervals, lit candles in the bedroom in the middle of the week, and stashed love letters in her girlfriend's handbag before she left for work in the morning.";
+let date = "24/10/2023";
+let nanoNarrative = "The Priceline chemist slowly transitioned from pills to pamper; their imperceptible change into a full-blown Mecca Cosmetica came as a shock to a headache-addled customer one day.";
 
 let body = 
 `
@@ -31,8 +31,7 @@ let body =
 `;
 
 let message = {
-  from: "Quiza12@live.com",
-  // bcc: "Quiza12@live.com",
+  from: "me@matthewquerzoli.com",
   bcc: "Quiza12@live.com;querzolix5@gmail.com;david@qloans.net.au",
   subject: "Nano Narrative - " + date,
   html: body 

@@ -9,3 +9,6 @@ Regex to trim down:
   2. ^- 
   2. 4 - 
   3. $
+
+
+https://dev.to/umekalu/submit-a-form-and-receive-email-using-express-nodejs-nodemailer-and-mailgun-complete-guide-nl1

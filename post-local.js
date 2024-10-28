@@ -293,8 +293,8 @@ function sendEmail() {
     console.log("Sending email to Mum and Dad...");
   
     let transporter = nodemailer.createTransport({
-      host: 'smtp-mail.outlook.com',
-      port: 587,
+      host: 'smtp.purelymail.com',
+      port: 465,
       auth: {
           user: process.env.E_USERNAME,
           pass: process.env.E_PASSWORD
@@ -302,7 +302,7 @@ function sendEmail() {
     })
   
     let message = {
-      from: "Quiza12@live.com",
+      from: "me@matthewquerzoli.com",
       bcc: "Quiza12@live.com;querzolix5@gmail.com;david@qloans.net.au",
       subject: "Nano Narrative - " + caption,
       html: 
