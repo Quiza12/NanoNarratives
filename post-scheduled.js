@@ -303,12 +303,19 @@ function sendEmail() {
     subject: "Nano Narrative - " + caption,
     html: 
       `
-      <p style="text-align: center; font-size: 16px;">${daysNanoNarrative}</p>
+      <p style="text-align: center; font-size: 16px;">${nanoNarrative}</p>
       <br />
       <p style="text-align: center;">${instagramSuccessful ? '✅' : '❌'} Instagram</p>
       <p style="text-align: center;">${redditSuccessful ? '✅' : '❌'} Reddit</p>
       <p style="text-align: center;">${facebookSuccessful ? '✅' : '❌'} Facebook</p>
-      <p style="text-align: center;">Posted manually on Medium and Threads</p>
+      <p style="text-align: center;">Posted manually on Medium, Threads and TikTok.</p>
+      <br>
+      <p style="text-align: center;"><a href="https://www.instagram.com/nanonarratives/"><a>Instagram</p>
+      <p style="text-align: center;"><a href="https://www.facebook.com/NanoNarratives"><a>Facebook</p>
+      <p style="text-align: center;"><a href="https://medium.com/the-quintessential-q/tagged/nano-narratives"><a>Medium</p>
+      <p style="text-align: center;"><a href="https://www.threads.net/@nanonarratives"><a>Threads</p>
+      <p style="text-align: center;"><a href="https://www.reddit.com/r/NanoNarratives/"><a>Reddit</p>
+      <p style="text-align: center;"><a href="https://www.tiktok.com/@narrativesnano"><a>Tiktok</p>
       `
   }
 
