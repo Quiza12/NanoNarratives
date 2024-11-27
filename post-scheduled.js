@@ -303,20 +303,28 @@ function sendEmail() {
     subject: "Nano Narrative - " + caption,
     html: 
       `
-      <p style="text-align: center; font-size: 16px;">${daysNanoNarrative}</p>
-      <br />
-      <p style="text-align: center;">${instagramSuccessful ? '✅' : '❌'} Instagram</p>
-      <p style="text-align: center;">${redditSuccessful ? '✅' : '❌'} Reddit</p>
-      <p style="text-align: center;">${facebookSuccessful ? '✅' : '❌'} Facebook</p>
-      <p style="text-align: center;">Posted manually on Medium, Threads and TikTok.</p>
-      <br>
-      <p style="text-align: center;"><a href="https://www.instagram.com/nanonarratives/"><a>Instagram</p>
-      <p style="text-align: center;"><a href="https://www.facebook.com/NanoNarratives"><a>Facebook</p>
-      <p style="text-align: center;"><a href="https://medium.com/the-quintessential-q/tagged/nano-narratives"><a>Medium</p>
-      <p style="text-align: center;"><a href="https://www.threads.net/@nanonarratives"><a>Threads</p>
-      <p style="text-align: center;"><a href="https://www.reddit.com/r/NanoNarratives/"><a>Reddit</p>
-      <p style="text-align: center;"><a href="https://www.tiktok.com/@narrativesnano"><a>Tiktok</p>
-      `
+        <p style="text-align: center; font-size: 16px;">${daysNanoNarrative}</p>
+
+        <hr>
+
+        <p style="text-align: center; font-size: 14px;">${instagramSuccessful ? '✅' : '❌'} Instagram</p>
+        <p style="text-align: center; font-size: 14px;">${redditSuccessful ? '✅' : '❌'} Reddit</p>
+        <p style="text-align: center; font-size: 14px;">${facebookSuccessful ? '✅' : '❌'} Facebook</p>
+        <p style="text-align: center; font-size: 14px;">Posted manually on Medium, Threads and TikTok.</p>
+
+        <hr>
+
+        <p style="text-align:center; font-size: 14px;">Nano Narratives across the web: </p>
+        <p style="text-align:center; font-size: 14px;">
+          <a href="https://www.instagram.com/nanonarratives/">Instagram</a>
+          | <a href="https://www.facebook.com/NanoNarratives">Facebook</a>
+          | <a href="https://medium.com/the-quintessential-q/tagged/nano-narratives">Medium</a>
+          | <a href="https://www.threads.net/@nanonarratives">Threads</a>
+          | <a href="https://www.reddit.com/r/NanoNarratives/">Reddit</a>
+          | <a href="https://www.tiktok.com/@narrativesnano">Tiktok</a>
+        </p>
+        <p style="text-align:center; font-size: 14px;">Forever and always a <a href="https://www.matthewquerzoli.com">Matthew Querzoli</a> project.</p>
+        `
   }
 
   transporter.sendMail(message, function(err, info) {
