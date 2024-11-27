@@ -307,7 +307,7 @@ function sendEmail() {
       subject: "Nano Narrative - " + caption,
       html: 
         `
-        <p style="text-align: center; font-size: 16px;">${nanoNarrative}</p>
+        <p style="text-align: center; font-size: 16px;">${daysNanoNarrative}</p>
         <br />
         <p style="text-align: center;">${instagramSuccessful ? '✅' : '❌'} Instagram</p>
         <p style="text-align: center;">${redditSuccessful ? '✅' : '❌'} Reddit</p>

@@ -18,11 +18,11 @@ let facebookSuccessful = true;
 let emailSuccessful = false;
 
 let date = "24/10/2023";
-let nanoNarrative = "The Priceline chemist slowly transitioned from pills to pamper; their imperceptible change into a full-blown Mecca Cosmetica came as a shock to a headache-addled customer one day.";
+let daysNanoNarrative = "The Priceline chemist slowly transitioned from pills to pamper; their imperceptible change into a full-blown Mecca Cosmetica came as a shock to a headache-addled customer one day.";
 
 let body = 
 `
-<p style="text-align: center; font-size: 16px;">${nanoNarrative}</p>
+<p style="text-align: center; font-size: 16px;">${daysNanoNarrative}</p>
 <br />
 <p style="text-align: center;">${instagramSuccessful ? '✅' : '❌'} Instagram</p>
 <p style="text-align: center;">${redditSuccessful ? '✅' : '❌'} Reddit</p>
