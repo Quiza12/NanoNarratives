@@ -91,13 +91,15 @@ function setupFbGraphForInstagram() {
 async function createMediaContainer() {
   console.log("  Creating media container...");
 
-  const url = `${process.env.IG_USER_ID}/media?image_url=${imageLink}${uniqueImageName}.jpg&caption=${caption}`;
+  const createMediaContainerUrl = `${process.env.IG_USER_ID}/media?fields=status_code&image_url=${imageLink}${uniqueImageName}.jpg&caption=${caption}`;
+  
   const maxRetries = 10;
   const delayMs = 2000;
+  const finishedStatus = 'FINISHED'
 
   try {
     const postResponse = await new Promise((resolve, reject) => {
-      graph.setOptions(options).post(url, (err, res) => {
+      graph.setOptions(options).post(createMediaContainerUrl, (err, res) => {
         if (err) reject(err);
         else resolve(res);
       });
@@ -106,27 +108,47 @@ async function createMediaContainer() {
     if (postResponse.id) {
       console.log("  Media container ID:", postResponse.id);
       mediaContainerId = postResponse.id;
-      return postInstagram();
+      // return postInstagram();
     }
 
-    // Poll until ID is available
+    // Poll until media container is FINISHED
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
       console.log(`  Polling attempt ${attempt}...`);
       await new Promise(resolve => setTimeout(resolve, delayMs));
 
       const pollResponse = await new Promise((resolve, reject) => {
-        graph.setOptions(options).get(url, (err, res) => {
+        let getMediaContainerStatusUrl = `${mediaContainerId}?fields=status_code`;
+        graph.setOptions(options).get(getMediaContainerStatusUrl, (err, res) => {
           if (err) reject(err);
           else resolve(res);
         });
       });
 
-      if (pollResponse.id) {
-        console.log("  Media container ID:", pollResponse.id);
+      if (pollResponse.status_code == finishedStatus) {
+        console.log("  Media container status code: ", pollResponse.status_code);
         mediaContainerId = pollResponse.id;
         return postInstagram();
-      }
+      } 
     }
+
+    // Poll until ID is available
+    // for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    //   console.log(`  Polling attempt ${attempt}...`);
+    //   await new Promise(resolve => setTimeout(resolve, delayMs));
+
+    //   const pollResponse = await new Promise((resolve, reject) => {
+    //     graph.setOptions(options).get(url, (err, res) => {
+    //       if (err) reject(err);
+    //       else resolve(res);
+    //     });
+    //   });
+
+    //   if (pollResponse.id) {
+    //     console.log("  Media container ID:", pollResponse.id);
+    //     mediaContainerId = pollResponse.id;
+    //     return postInstagram();
+    //   }
+    // }
 
     throw new Error("  Media container ID not received after polling.");
   } catch (err) {
