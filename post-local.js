@@ -7,11 +7,11 @@ import fetch from 'node-fetch';
 import snoowrap from 'snoowrap';
 import nodemailer from 'nodemailer';
 
-var postToInstagram = false;
+var postToInstagram = true;
 var postToTwitter = false;
 var postToMedium = false;
-var postToReddit = false;
-var postToFacebook = false;
+var postToReddit = true;
+var postToFacebook = true;
 var postToEmail = true;
 
 let instagramSuccessful = true;
@@ -59,8 +59,8 @@ function getDate() {
   uniqueImageName = dd + '' + mm + '' + yyyy;
 
   //overrides
-  // caption = '29/12/2023';
-  // uniqueImageName = '29122023';
+  caption = '02/11/2025';
+  uniqueImageName = '02112025';
 
   console.log("Posting for " + caption);
   console.log("");
