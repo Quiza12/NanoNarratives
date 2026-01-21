@@ -12,3 +12,6 @@ Regex to trim down:
 
 
 https://dev.to/umekalu/submit-a-form-and-receive-email-using-express-nodejs-nodemailer-and-mailgun-complete-guide-nl1
+
+Image generation:
+https://jimp-dev.github.io/jimp/guides/getting-started/
