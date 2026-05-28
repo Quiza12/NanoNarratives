@@ -1,7 +1,6 @@
-name: Scheduled Job TEMP
+name: Scheduled Nano Narratives post
 
 on:
-  # workflow_dispatch:
   schedule:
     - cron: "0 6 * * *" 
 
