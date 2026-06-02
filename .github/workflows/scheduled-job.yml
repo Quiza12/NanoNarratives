@@ -2,7 +2,7 @@ name: Scheduled Nano Narratives post
 
 on:
   schedule:
-    - cron: "30 6 * * *" 
+    - cron: "0 4 * * *" 
 
 # on: push #on commit
 
