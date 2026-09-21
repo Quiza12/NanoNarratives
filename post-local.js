@@ -303,7 +303,7 @@ function sendEmail() {
   
     let message = {
       from: "me@matthewquerzoli.com",
-      bcc: "Quiza12@live.com;querzolix5@gmail.com;david@qloans.net.au",
+      bcc: "Quiza12@live.com;querzolix5@gmail.com;david@qloans.net.au;hilton@orkinbrown.co.za;chloe@orkinbrown.co.za",
       // bcc: "Quiza12@live.com",
       subject: "Nano Narrative - " + caption,
       html: 
