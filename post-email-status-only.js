@@ -15,10 +15,10 @@ let twitterSuccessful = true;
 let mediumSuccessful = true;
 let redditSuccessful = true;
 let facebookSuccessful = true;
-let emailSuccessful = false;
+let emailSuccessful = true;
 
-let date = "24/10/2023";
-let daysNanoNarrative = "The Priceline chemist slowly transitioned from pills to pamper; their imperceptible change into a full-blown Mecca Cosmetica came as a shock to a headache-addled customer one day.";
+let date = "03/08/2026";
+let daysNanoNarrative = "A man leans against a wall, stretching out his hamstrings, or propping up the brickwork. Kevin hopes it is the former.";
 
 let body = 
   `
