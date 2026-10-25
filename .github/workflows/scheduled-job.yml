@@ -2,21 +2,23 @@ name: Scheduled Nano Narratives post
 
 on:
   schedule:
-    - cron: "0 3 * * *" 
+    - cron: "0 3 * * *" # UTC
+  workflow_dispatch: # lets you run it manually from the Actions tab
 
-# on: push #on commit
+permissions:
+  contents: read
 
 jobs:
   scheduled-job:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: "16"
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "16"
-      - run: npm install
+          node-version: "22"
+          cache: npm
+      - run: npm ci # use `npm install` if you don't have a package-lock.json
       - env:
           TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
           TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
@@ -33,4 +35,6 @@ jobs:
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
           E_USERNAME: ${{ secrets.E_USERNAME }}
           E_PASSWORD: ${{ secrets.E_PASSWORD }}
-        run: node post-scheduled.js "$TWITTER_CONSUMER_KEY" "$TWITTER_CONSUMER_SECRET" "$TWITTER_ACCESS_TOKEN_KEY" "$TWITTER_ACCESS_TOKEN_SECRET" "$IG_UAT" "$IG_USER_ID" "$M_INTEGRATION_TOKEN" "$R_USERNAME" "$R_PASSWORD" "$R_CLIENT" "$R_SECRET" "$FB_PAT" "$FB_PAGE_ID" "$E_USERNAME" "$E_PASSWORD"
+          THREADS_UAT: ${{ secrets.THREADS_UAT }}
+          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+        run: node post.js "$TWITTER_CONSUMER_KEY" "$TWITTER_CONSUMER_SECRET" "$TWITTER_ACCESS_TOKEN_KEY" "$TWITTER_ACCESS_TOKEN_SECRET" "$IG_UAT" "$IG_USER_ID" "$M_INTEGRATION_TOKEN" "$R_USERNAME" "$R_PASSWORD" "$R_CLIENT" "$R_SECRET" "$FB_PAT" "$FB_PAGE_ID" "$E_USERNAME" "$E_PASSWORD" "$THREADS_UAT" "$THREADS_USER_ID"
