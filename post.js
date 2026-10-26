@@ -51,7 +51,7 @@ const enabled = LOCAL
       reddit: false,
       threads: true,
       twitter: false,
-      medium: false,
+      medium: true,
       email: false,
     }
   : {
@@ -60,7 +60,7 @@ const enabled = LOCAL
       reddit: true,
       threads: true,
       twitter: false,
-      medium: false,
+      medium: true,
       email: true,
     };
 
