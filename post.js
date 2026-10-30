@@ -12,7 +12,7 @@ import nodemailer from 'nodemailer';
 
 // true  = read secrets from process.env (your local env.js)
 // false = read secrets passed as command line args by GitHub Actions
-const LOCAL = true;
+const LOCAL = false;
 
 // Order must match the order of the args in the GitHub Actions workflow
 const ARG_ORDER = [
@@ -46,13 +46,13 @@ const cfg = LOCAL
 // flip on just the one you're testing. Scheduled runs use the live set.
 const enabled = LOCAL
   ? {
-      instagram: false,
-      facebook: false,
-      reddit: false,
-      threads: false,
+      instagram: true,
+      facebook: true,
+      reddit: true,
+      threads: true,
       twitter: false,
-      medium: true,
-      email: false,
+      medium: false,
+      email: true,
     }
   : {
       instagram: true,
