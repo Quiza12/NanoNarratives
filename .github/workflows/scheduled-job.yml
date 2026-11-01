@@ -2,7 +2,7 @@ name: Scheduled Nano Narratives post
 
 on:
   schedule:
-    - cron: "0 3 * * *" # UTC
+    - cron: "0 2 * * *" # UTC
   workflow_dispatch: # lets you run it manually from the Actions tab
 
 permissions:
